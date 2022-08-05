@@ -21,6 +21,10 @@ from .protobuf import sliver_pb2
 
 
 class BaseInteractiveCommands(object):
+    
+    async def getprivs(self) -> sliver_pb2.GetPrivs:
+        '''Retrieve the integrity context of the interactive session'''
+        return (await self._stub.GetPrivs(self._request(sliver_pb2.GetPrivs()), timeout=self.timeout))
 
     async def ping(self) -> sliver_pb2.Ping:
         '''Send a round trip message to the implant (does NOT use ICMP)
